@@ -16,7 +16,7 @@ class PaymentsController < ApplicationController
   def create
     @payment = Payment.new payment_params
 
-    if @payment.purchase && @payment.save
+    if @payment.save
       update_purchased_ticket_purchases
       redirect_to conference_conference_registration_path(@conference.short_title),
                   notice: 'Thanks! Your ticket is booked successfully.'
@@ -31,10 +31,8 @@ class PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.permit(:stripe_customer_email, :stripe_customer_token)
-          .merge(stripe_customer_email: params[:stripeEmail],
-                 stripe_customer_token: params[:stripeToken],
-                 user: current_user, conference: @conference)
+    params.permit(:attachment)
+          .merge(user: current_user, conference: @conference)
   end
 
   def update_purchased_ticket_purchases
