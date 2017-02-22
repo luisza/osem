@@ -31,7 +31,7 @@ class PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.permit(:attachment)
+    params.require(:payment ).permit(:attachment )
           .merge(user: current_user, conference: @conference)
   end
 
