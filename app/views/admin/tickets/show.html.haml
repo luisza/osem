@@ -17,6 +17,7 @@
         %th Name
         %th Quantity
         %th E-Mail
+        %th Invoice
         %th Affiliation
         %th Paid
       %tbody
@@ -30,6 +31,10 @@
               = buyer.ticket_purchases.where(ticket_id: @ticket.id).sum('quantity')
             %td
               = buyer.email
+            %td
+              - buyer.payments.each do |pay|
+                = link_to pay.attachment target: '_blank'
+              done
             %td
               = buyer.affiliation
             %td

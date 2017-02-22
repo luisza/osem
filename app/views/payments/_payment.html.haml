@@ -23,6 +23,8 @@
     .field
     = f.label :attachment
     = f.file_field :attachment
+    .field
+    =hidden_field_tag 'payment[pdf]', '1'
     .actions
     %p.text-right
       = f.submit 'Pay', class: 'btn btn-success'
