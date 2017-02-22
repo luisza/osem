@@ -9,6 +9,7 @@ class Payment < ActiveRecord::Base
   validates :status, presence: true
   validates :user_id, presence: true
   validates :conference_id, presence: true
+  mount_uploader :attachment, AttachmentUploader # Tells rails to use this uploader for this model.
 
   enum status: {
     unpaid: 0,

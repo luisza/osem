@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170129075434) do
+ActiveRecord::Schema.define(version: 20170222054229) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.uuid     "visit_id",   limit: 16
@@ -264,16 +264,8 @@ ActiveRecord::Schema.define(version: 20170129075434) do
     t.datetime "updated_at"
   end
 
-  create_table "payments", force: :cascade do |t|
-    t.string   "last4"
-    t.integer  "amount"
-    t.string   "authorization_code"
-    t.integer  "status",             default: 0, null: false
-    t.integer  "user_id",                        null: false
-    t.integer  "conference_id",                  null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-  end
+# Could not dump table "payments" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "programs", force: :cascade do |t|
     t.integer  "conference_id"
