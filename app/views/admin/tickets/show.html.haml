@@ -32,9 +32,11 @@
             %td
               = buyer.email
             %td
-              - buyer.payments.each do |pay|
-                = link_to pay.attachment target: '_blank'
-              done
+              %ol
+                - buyer.payments.each do |pay|
+                  %li
+                    = link_to "Invoice", pay.attachment_url, target: '_blank'
+                    %br
             %td
               = buyer.affiliation
             %td
