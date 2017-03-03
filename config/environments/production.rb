@@ -71,6 +71,8 @@ Osem::Application.configure do
 
   # Set the smtp configuration of your service provider
   # For further details of each configuration checkout: http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration
+  config.action_mailer.delivery_method = :sendmail
+
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
