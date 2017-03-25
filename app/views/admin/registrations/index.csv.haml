@@ -1,4 +1,15 @@
-- headers = ['Name', 'Email']
+- headers = ['Name', 'Email', 'Ha participado antes', 'genero', 'camisa', 'se enteró por', 'Hora llega', 'Hora se va', 'Tipo tiquete', 'valor tiquete', 'Método de pago']
 = CSV.generate_line headers
 - @registrations.each do |registration|
-  = CSV.generate_line([registration.name, registration.email])
+  - row = []
+  - row << registration.name
+  - row << registration.email
+  - registration.qanswers.each do |answer| 
+    - row << ( answer ? answer.answer.title : '' )
+  - row << registration.arrival.to_s || ''
+  - row << registration.departure.to_s || ''
+  - pu = registration.conference.ticket_purchases.find_by(user: registration.user)
+  - row << ( pu ? pu.title : ' ' )
+  - row << ( pu ? pu.price : ' ' )
+  - row << ( pu ? pu.paymethod : ' ' )
+  = CSV.generate_line row
