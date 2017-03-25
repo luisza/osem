@@ -5,10 +5,24 @@
         %h1
           Tickets
       %p.lead
-        Please choose your tickets for 
+        Por favor compre su tickete para: 
         %strong
           = @conference.title
-        here*
+        aquí*
+
+      %h1 Formas de pago
+      %h2 Mediante depósito bancario
+      %div.alert.alert-info
+        .content
+          :markdown
+            ## Dialogía de Información y Comunicación S.C.
+
+            - **Cuenta IBAN (Internacional):** CR38015109620020034632
+            - **Cuenta Banco Nacional (CR):** 200-02-096-003463-0
+            - **Cuenta Cliente (CR):** 15109620020034632
+            - **Cédula jurídica:** 3-106- 562299
+            - **Correo-e:** cfloreshine@gmail.com
+
       =form_tag(conference_ticket_purchases_path, method: :post) do |f|
         %table.table.table-hover
           %thead
