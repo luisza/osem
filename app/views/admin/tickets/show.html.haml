@@ -35,7 +35,7 @@
               %ol
                 - buyer.payments.each do |pay|
                   %li
-                    = link_to "Invoice", pay.attachment_url, target: '_blank'
+                    = link_to "Invoice", "/registro/#{pay.attachment_url}", target: '_blank'
                     %br
             %td
               = buyer.ticket_purchases.first.paymethod
