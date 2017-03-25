@@ -85,6 +85,7 @@ class ConferenceRegistrationsController < ApplicationController
 
   def destroy
     if @registration.destroy
+      current_user.ticket_purchases.by_conference(@conference).destroy_all
       redirect_to root_path,
                   notice: "You are not registered for #{@conference.title} anymore!"
     else

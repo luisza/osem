@@ -18,7 +18,7 @@
         %th Quantity
         %th E-Mail
         %th Invoice
-        %th Affiliation
+        %th Pay Method
         %th Paid
       %tbody
         - @ticket.buyers.each_with_index do |buyer, index|
@@ -38,7 +38,7 @@
                     = link_to "Invoice", pay.attachment_url, target: '_blank'
                     %br
             %td
-              = buyer.affiliation
+              = buyer.ticket_purchases.first.paymethod
             %td
               = @ticket.tickets_paid(buyer)
 

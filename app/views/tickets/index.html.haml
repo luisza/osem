@@ -10,18 +10,12 @@
           = @conference.title
         aquí*
 
-      %h1 Formas de pago
-      %h2 Mediante depósito bancario
-      %div.alert.alert-info
+      %div.alert.alert-danger
         .content
-          :markdown
-            ## Dialogía de Información y Comunicación S.C.
-
-            - **Cuenta IBAN (Internacional):** CR38015109620020034632
-            - **Cuenta Banco Nacional (CR):** 200-02-096-003463-0
-            - **Cuenta Cliente (CR):** 15109620020034632
-            - **Cédula jurídica:** 3-106- 562299
-            - **Correo-e:** cfloreshine@gmail.com
+          %p Tiene 15 días para comprar el tiquete, y enviarnos el comprobante o el sistema lo desregistrará del evento.
+          %p Solo las siguientes personas están autorizadas para recibir dinero vía MoneyGram.
+          %p Por favor escribir el nombres completo y en el asunto indicar "inscripción ECSL + su nombre completo"
+          %p Solo se puede comprar un tiquete por registro
 
       =form_tag(conference_ticket_purchases_path, method: :post) do |f|
         %table.table.table-hover
@@ -32,6 +26,18 @@
               %th Price
               %th Total
           %tbody
+          %tr
+            %td
+              %h4 Método de pago
+          
+              != ' <input type="radio" name="paymethod" value="Deposito bancario a Dialogía de Información y Comunicación S.C.">Deposito bancario a <b>Dialogía de Información y Comunicación S.C.</b><br><ul> <li><b>Cuenta IBAN (Internacional):</b> CR38015109620020034632</li> <li><b>Cuenta Banco Nacional (CR):</b> 200-02-096-003463-0</li> <li><b>Cuenta Cliente (CR):</b> 15109620020034632</li> <li><b>Cédula jurídica:</b> 3-106- 562299</li></ul></input>'
+              != ' <input type="radio" name="paymethod" value="Luis Enrique Zárate Montero	402120119">MoneyGram Luis Enrique Zárate Montero	402120119</input> <br>'
+              != ' <input type="radio" name="paymethod" value="José Daniel Jenkins Pérez	112470493">MoneyGram José Daniel Jenkins Pérez	112470493</input>  <br>'
+              != ' <input type="radio" name="paymethod" value="Diego Gonzalo Chacón Rojas	205590806">MoneyGram Diego Gonzalo Chacón Rojas	205590806</input>  <br>'
+              != ' <input type="radio" name="paymethod" value="Leonardo Jiménez Quijano	110140191">MoneyGram Leonardo Jiménez Quijano	110140191</input>  <br>'
+            %td
+            %td
+            %td
           - @conference.tickets.each do |ticket|
             = render partial: 'ticket', f: f, locals: {ticket: ticket}
           %tr
@@ -61,3 +67,5 @@
       %p.text-muted.text-center
         %small
           * Getting a ticket is mandatory. Your participation will not be valid until you get a ticket.
+
+!= '<script>$("#tickets__3").on("change", function(){   if(this.value>0){     if( $("#tickets__2").val()>0 ){      $("#tickets__2").val(0);      $("#tickets__2").change();     }     if(this.value>1){       $("#tickets__3").val(1);       $("#tickets__3").change();     }   } }); $("#tickets__2").on("change", function(){   if(this.value>0){     if( $("#tickets__3").val()>0 ){      $("#tickets__3").val(0);      $("#tickets__3").change();     }     if(this.value>1){       $("#tickets__2").val(1);       $("#tickets__2").change();    }   } });</script>'

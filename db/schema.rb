@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222054229) do
+ActiveRecord::Schema.define(version: 20170325090939) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.uuid     "visit_id",   limit: 16
@@ -440,11 +440,12 @@ ActiveRecord::Schema.define(version: 20170222054229) do
   create_table "ticket_purchases", force: :cascade do |t|
     t.integer  "ticket_id",     limit: 4
     t.integer  "conference_id", limit: 4
-    t.boolean  "paid",                    default: false
+    t.boolean  "paid",                      default: false
     t.datetime "created_at"
-    t.integer  "quantity",      limit: 4, default: 1
+    t.integer  "quantity",      limit: 4,   default: 1
     t.integer  "user_id",       limit: 4
     t.integer  "payment_id",    limit: 4
+    t.string   "paymethod",     limit: 255
   end
 
   create_table "tickets", force: :cascade do |t|

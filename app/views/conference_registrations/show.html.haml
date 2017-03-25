@@ -102,9 +102,13 @@
                 for
                 = tickets.first.price.symbol
                 = humanized_money tickets.first.price
+                %br
+                %p Pago a:
+                = tickets.first.paymethod
             %br
+
         - if @tickets.any?
-          = link_to 'Get more tickets', conference_tickets_path(@conference.short_title), class: "btn btn-default"
+          %p Ya compró su tiquete del evento
         - else
           You haven't bought any tickets.
           = link_to 'Please get some tickets to support us!', conference_tickets_path(@conference.short_title)
