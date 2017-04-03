@@ -27,6 +27,14 @@ module Admin
       if @question.question_type_id == QuestionType.find_by(title: 'Yes/No').id
         @question.answers = [Answer.find_by(title: 'Yes'), Answer.find_by(title: 'No')]
       end
+      
+      if @question.question_type_id == QuestionType.find_by(title: 'Text Area').id
+        @question.answers = [Answer.find_by(title: 'Not Show')]
+      end
+ 
+      if @question.question_type_id == QuestionType.find_by(title: 'Text Input').id
+        @question.answers = [Answer.find_by(title: 'Not Show')]
+      end      
 
       respond_to do |format|
         if @conference.save

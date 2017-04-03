@@ -14,7 +14,7 @@
 
     var selected_type = $(this).find('option:selected').text();
 
-    if (selected_type == 'Yes/No')
+    if (selected_type == 'Yes/No' || selected_type == 'Text Input' || selected_type == 'Text Area')
       $('#answers_col').addClass('hidden');
     else
       $('#answers_col').removeClass('hidden');

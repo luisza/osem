@@ -3,7 +3,8 @@ class Registration < ActiveRecord::Base
   belongs_to :conference
 
   has_and_belongs_to_many :events
-  has_and_belongs_to_many :qanswers
+  has_many :qanswers_registrations
+  has_and_belongs_to_many :qanswers, :through => :qanswers_registrations
   has_and_belongs_to_many :vchoices
 
   has_many :events_registrations

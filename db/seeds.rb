@@ -18,10 +18,11 @@ user.save!
 qtype_yesno = QuestionType.find_or_create_by!(title: 'Yes/No')
 QuestionType.find_or_create_by!(title: 'Single Choice')
 QuestionType.find_or_create_by!(title: 'Multiple Choice')
-
+ta=QuestionType.find_or_create_by!(title: 'Text Area')
+ti=QuestionType.find_or_create_by!(title: 'Text Input')
 answer_yes = Answer.find_or_create_by!(title: 'Yes')
 answer_no = Answer.find_or_create_by!(title: 'No')
-
+Answer.find_or_create_by!(title: 'Not Show')
 questions_yes_no = ['Do you need handicapped access?',
                     'Will you attend with a partner?',
                     'Will you attend the social event(s)?',

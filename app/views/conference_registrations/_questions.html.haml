@@ -8,3 +8,18 @@
         = f.input :qanswers, :collection => question.qanswers.joins(:answer).pluck("answers.title, qanswers.id"), :as => :select, label: question.title, :input_html => { :multiple => true}
         %p Use "Control" o "Command" en Mac para marcar más de una opción
 
+      - if question.question_type.title == 'Text Input'
+        %input.form-control{:type=>"hidden", :name=>"registration[qanswer_ids][]", :value=>"#{question.qanswers.joins(:answer).pluck("answers.title, qanswers.id")[0][1]}"}        
+        %label #{question.title}
+        - if question.qanswers.joins(:answer).first.qanswers_registrations.any?
+          %input.form-control{:type=>"text", :name=>"qanswers_attributes[#{question.id}]", :value=>"#{question.qanswers.joins(:answer).first.qanswers_registrations.first.textarea}"}
+        - else
+          %input.form-control{:type=>"text", :name=>"qanswers_attributes[#{question.id}]", :value=>""}
+
+
+      - if question.question_type.title == 'Text Area'
+        %input.form-control{:type=>"hidden", :name=>"registration[qanswer_ids][]", :value=>"#{question.qanswers.joins(:answer).pluck("answers.title, qanswers.id")[0][1]}"}
+        %label #{question.title}
+        %textarea.form-control{:name=>"qanswers_attributes[#{question.id}]"}
+          - if question.qanswers.joins(:answer).first.qanswers_registrations.any?
+            #{question.qanswers.joins(:answer).first.qanswers_registrations.first.textarea}

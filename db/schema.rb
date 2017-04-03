@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170325090939) do
+ActiveRecord::Schema.define(version: 20170402190501) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.uuid     "visit_id",   limit: 16
@@ -300,8 +300,9 @@ ActiveRecord::Schema.define(version: 20170325090939) do
   end
 
   create_table "qanswers_registrations", id: false, force: :cascade do |t|
-    t.integer "registration_id", limit: 4, null: false
-    t.integer "qanswer_id",      limit: 4, null: false
+    t.integer "registration_id", limit: 4,     null: false
+    t.integer "qanswer_id",      limit: 4,     null: false
+    t.text    "textarea",        limit: 65535
   end
 
   create_table "question_types", force: :cascade do |t|

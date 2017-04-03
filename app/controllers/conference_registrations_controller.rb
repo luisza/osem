@@ -3,6 +3,7 @@ class ConferenceRegistrationsController < ApplicationController
   load_resource :conference, find_by: :short_title
   authorize_resource :conference_registrations, class: Registration, except: [:new, :create]
   before_action :set_registration, only: [:edit, :update, :destroy, :show]
+  
 
   def new
     @registration = Registration.new(conference_id: @conference.id)
@@ -52,7 +53,7 @@ class ConferenceRegistrationsController < ApplicationController
     if @registration.save
       # Trigger ahoy event
       ahoy.track 'Registered', title: 'New registration'
-
+      add_answer_attributes
       # Sign in the new user
       unless current_user
         sign_in(@registration.user)
@@ -72,8 +73,18 @@ class ConferenceRegistrationsController < ApplicationController
     end
   end
 
-  def update
+  def add_answer_attributes
+    params["qanswers_attributes"].each do | question, value |
+      qans= @registration.qanswers.where(:question=>question).first
+      value = value.gsub(/\\/, '\&\&').gsub(/'/, "''")
+      sql="UPDATE `qanswers_registrations` SET `textarea`='"+value+"' where `registration_id`="+@registration.id.to_s+" and `qanswer_id`="+qans.id.to_s+";"
+      ActiveRecord::Base.connection.execute(sql)      
+    end
+  end
+
+  def update  
     if @registration.update_attributes(registration_params)
+      add_answer_attributes
       redirect_to  conference_conference_registration_path(@conference.short_title),
                    notice: 'Registration was successfully updated.'
     else
