@@ -52,7 +52,7 @@
               - if @registration.qanswers.any?
                 - @registration.qanswers.where(:question_id => q.id).each do |qa|
                   - if qa.qanswers_registrations.where(:registration => @registration.id).first.textarea.present?
-                    = qa.qanswers_registrations.first.textarea
+                    = qa.qanswers_registrations.where(:registration => @registration.id).first.textarea
                   - else
                     = qa.answer.title
               - else
@@ -70,20 +70,20 @@
             %li
               = link_to event.title, conference_program_proposal_path(@conference.short_title, event.id)
               = '(' + registered_text(event) + ')'
-
-  - if @registration.conference.program.events.remaining_for_registration(@registration).any?
-    .row
-      .col-md-12
-        %h4
-          %span.fa-stack
-            %i.fa.fa-square-o.fa-stack-2x
-            %i.fa.fa-question.fa-stack-1x
-          Events that require registration
-        %ul
-          - @registration.conference.program.events.remaining_for_registration(@registration).each do |event|
-            %li
-              = link_to event.title, conference_program_proposal_path(@conference.short_title, event.id)
-              = '(' + registered_text(event) + ')'
+  /
+    - if @registration.conference.program.events.remaining_for_registration(@registration).any?
+      .row
+        .col-md-12
+          %h4
+            %span.fa-stack
+              %i.fa.fa-square-o.fa-stack-2x
+              %i.fa.fa-question.fa-stack-1x
+            Events that require registration
+          %ul
+            - @registration.conference.program.events.remaining_for_registration(@registration).each do |event|
+              %li
+                = link_to event.title, conference_program_proposal_path(@conference.short_title, event.id)
+                = '(' + registered_text(event) + ')'
 
   - if @conference.tickets.any?
     .row

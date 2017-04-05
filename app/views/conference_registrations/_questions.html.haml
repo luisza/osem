@@ -11,8 +11,8 @@
       - if question.question_type.title == 'Text Input'
         %input.form-control{:type=>"hidden", :name=>"registration[qanswer_ids][]", :value=>"#{question.qanswers.joins(:answer).pluck("answers.title, qanswers.id")[0][1]}"}        
         %label #{question.title}
-        - if question.qanswers.joins(:answer).first.qanswers_registrations.any?
-          %input.form-control{:type=>"text", :name=>"qanswers_attributes[#{question.id}]", :value=>"#{question.qanswers.joins(:answer).first.qanswers_registrations.first.textarea}"}
+        - if question.qanswers.joins(:answer).first.qanswers_registrations.where(:registration_id=>@registration.id).any?
+          %input.form-control{:type=>"text", :name=>"qanswers_attributes[#{question.id}]", :value=>"#{question.qanswers.joins(:answer).first.qanswers_registrations.where(:registration_id=>@registration.id).first.textarea}"}
         - else
           %input.form-control{:type=>"text", :name=>"qanswers_attributes[#{question.id}]", :value=>""}
 
@@ -21,5 +21,5 @@
         %input.form-control{:type=>"hidden", :name=>"registration[qanswer_ids][]", :value=>"#{question.qanswers.joins(:answer).pluck("answers.title, qanswers.id")[0][1]}"}
         %label #{question.title}
         %textarea.form-control{:name=>"qanswers_attributes[#{question.id}]"}
-          - if question.qanswers.joins(:answer).first.qanswers_registrations.any?
-            #{question.qanswers.joins(:answer).first.qanswers_registrations.first.textarea}
+          - if question.qanswers.joins(:answer).first.qanswers_registrations.where(:registration_id=>@registration.id).any?
+            #{question.qanswers.joins(:answer).first.qanswers_registrations.where(:registration_id=>@registration.id).first.textarea}
